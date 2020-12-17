@@ -30,8 +30,8 @@ jobs:
           
           if [ $today == $arr[0] ]
           then
-            echo "::set-env name=ISREMIND::1"
             echo "今天是$arr[1]，别忘记了哦~" > remind.html
+            echo "::set-env name=ISREMIND::1"
             break
           fi
           done
