@@ -17,7 +17,6 @@ jobs:
       - name: is reminder
         env:
           DATES: ${{ secrets.DATES }}
-          ISREMIND: 0
         run: |
           today=$(date "+%m-%d")
 
@@ -31,7 +30,7 @@ jobs:
           
           if [ $today == $arr[0] ]
           then
-            env.ISREMIND=1
+            echo "::set-env name=ISREMIND::1"
             echo "今天是$arr[1]，别忘记了哦~" > remind.html
             break
           fi
