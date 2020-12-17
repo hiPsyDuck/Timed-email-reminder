@@ -1,7 +1,4 @@
-# Timed-email-reminder
-定时邮件提醒
-
-# 使用
+## 使用
 
 1. Fork仓库
 
