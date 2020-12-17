@@ -31,12 +31,12 @@ jobs:
           if [ $today == $arr[0] ]
           then
             echo "今天是$arr[1]，别忘记了哦~" > remind.html
-            echo "ISREMIND=1" >> $GITHUB_ENV
+            echo "ISREMIND=true" >> $GITHUB_ENV
             break
           fi
           done
       - name: send email
-        if: ${ISREMIND} == 1
+        if: ${{ GITHUB_ENV.ISREMIND == true }}
         uses: dawidd6/action-send-mail@master
         with:
           serveraddress: smtp.qq.com
