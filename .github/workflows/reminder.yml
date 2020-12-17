@@ -39,9 +39,6 @@ jobs:
             break
           fi
           done
-
-          echo "ISREMIND is $ISREMIND"
-
       - name: send email
         if: env.ISREMIND == 1
         uses: dawidd6/action-send-mail@v2
