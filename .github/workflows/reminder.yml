@@ -11,14 +11,13 @@ jobs:
   run-it:
     runs-on: ubuntu-latest
     name: build service
-    env: 
-      ISREMIND: 0
     steps: 
       - name: checkout main
         uses: actions/checkout@main
       - name: is reminder
         env:
           DATES: ${{ secrets.DATES }}
+          ISREMIND: 0
         run: |
           today=$(date "+%m-%d")
 
@@ -32,7 +31,7 @@ jobs:
           
           if [ $today == $arr[0] ]
           then
-            ${ISREMIND}=1
+            env.ISREMIND=1
             echo "今天是$arr[1]，别忘记了哦~" > remind.html
             break
           fi
