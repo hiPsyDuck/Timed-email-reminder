@@ -1,0 +1,52 @@
+name: Timed-email-reminder
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: 0 21 * * *
+
+jobs:
+  run-it:
+    runs-on: ubuntu-latest
+    name: build service
+    env: 
+      ISREMIND: 0
+    steps: 
+      - name: checkout main
+        uses: actions/checkout@main
+      - name: is reminder
+        env:
+          DATES: ${{ secrets.DATES }}
+        run: |
+          today=$(date "+%m-%d")
+
+          for date in ${DATES[*]}
+          do
+          
+          OLD_IFS="$IFS"
+          IFS=":"
+          arr=($date)
+          IFS="$OLD_IFS"
+          
+          if [ $today == $arr[0] ]
+          then
+            ${ISREMIND}=1
+            echo "今天是$arr[1]，别忘记了哦~" > remind.html
+            break
+          fi
+          done
+      - name: send email
+        if: ${{ ISREMIND == 1 }}
+        uses: dawidd6/action-send-mail@master
+        with:
+          serveraddress: smtp.qq.com
+          serverport: 465
+          username: ${{ secrets.EMAIL }}
+          password: ${{ secrets.PASSWORD }}
+          subject: Timed Email Reminder
+          body: file://remind.html
+          to: ${{ secrets.EMAIL }}
+          from: GitHub Actions
+          content_type: text/html
