@@ -43,7 +43,7 @@ jobs:
           echo "ISREMIND is $ISREMIND"
 
       - name: send email
-        if: ${{ $ISREMIND == 1 }}
+        if: env.ISREMIND == 1
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.qq.com
