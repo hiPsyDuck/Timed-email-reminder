@@ -36,7 +36,7 @@ jobs:
           fi
           done
       - name: send email
-        if: ${{ GITHUB_ENV.ISREMIND == true }}
+        if: ${{ $ISREMIND == true }}
         uses: dawidd6/action-send-mail@master
         with:
           serveraddress: smtp.qq.com
