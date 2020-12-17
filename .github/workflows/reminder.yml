@@ -22,11 +22,16 @@ jobs:
 
           for date in ${DATES[*]}
           do
+
+          echo "today is $today"
+          
           
           OLD_IFS="$IFS"
           IFS=":"
           arr=($date)
           IFS="$OLD_IFS"
+
+          echo "this date is $arr[0]"
           
           if [ $today == $arr[0] ]
           then
