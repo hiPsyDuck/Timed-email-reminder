@@ -19,29 +19,27 @@ jobs:
           DATES: ${{ secrets.DATES }}
         run: |
           today=$(date "+%m-%d")
+          echo "today is $today"
 
           for date in ${DATES[*]}
           do
-
-          echo "today is $today"
-          
           
           OLD_IFS="$IFS"
           IFS=":"
           arr=($date)
           IFS="$OLD_IFS"
 
-          echo "this date is $arr[0]"
+          echo "this date is ${arr[0]}"
           
-          if [ $today == $arr[0] ]
+          if [ $today == ${arr[0]} ]
           then
-            echo "今天是$arr[1]，别忘记了哦~" > remind.html
+            echo "今天是${arr[1]}，别忘记了哦~" > remind.html
             echo "ISREMIND=true" >> $GITHUB_ENV
             break
           fi
           done
       - name: send email
-        if: env.ISREMIND == true
+        if: $ISREMIND == true
         uses: dawidd6/action-send-mail@master
         with:
           serveraddress: smtp.qq.com
