@@ -40,14 +40,14 @@ jobs:
           fi
           done
       - name: send email
-        uses: dawidd6/action-send-mail@master
+        uses: dawidd6/action-send-mail@v2
         with:
-          serveraddress: smtp.qq.com
-          serverport: 465
+          server_address: smtp.qq.com
+          server_port: 465
           username: ${{ secrets.EMAIL }}
           password: ${{ secrets.PASSWORD }}
           subject: Timed Email Reminder
           body: file://remind.html
           to: ${{ secrets.EMAIL }}
-          from: GitHub Actions
+          from: GitHub Actions Timed-email-reminder
           content_type: text/html
