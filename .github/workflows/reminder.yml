@@ -35,11 +35,15 @@ jobs:
           then
             echo "send email"
             echo "今天是${arr[1]}，别忘记了哦~" > remind.html
-            echo "ISREMIND=true" >> $GITHUB_ENV
+            echo "ISREMIND=1" >> $GITHUB_ENV
             break
           fi
           done
+
+          echo "ISREMIND is $ISREMIND"
+
       - name: send email
+        if: ${{ $ISREMIND == 1 }}
         uses: dawidd6/action-send-mail@v2
         with:
           server_address: smtp.qq.com
@@ -49,5 +53,5 @@ jobs:
           subject: Timed Email Reminder
           body: file://remind.html
           to: ${{ secrets.EMAIL }}
-          from: GitHub Actions Timed-email-reminder
+          from: Timed-email-reminder
           content_type: text/html
