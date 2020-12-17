@@ -38,7 +38,7 @@ jobs:
           fi
           done
       - name: send email
-        if: ${{ jobs.run-it.env.ISREMIND == 1 }}
+        if: ${{ env.ISREMIND == 1 }}
         uses: dawidd6/action-send-mail@master
         with:
           serveraddress: smtp.qq.com
