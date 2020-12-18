@@ -11,6 +11,8 @@ jobs:
   run-it:
     runs-on: ubuntu-latest
     name: build service
+    env:
+      TZ: Asia/Shanghai
     steps: 
       - name: checkout main
         uses: actions/checkout@main
